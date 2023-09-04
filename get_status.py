@@ -5,17 +5,17 @@ import json
 router = {"ip": "ios-xe-mgmt.cisco.com", "port": "9443",
           "user": "root", "password": "D_Vay!_10&"}
 
-# set REST API headers
+#headers
 headers = {"Accept": "application/yang-data+json",
            "Content-Type": "application/yang-data+json"}
 
-#selecting interfaces datastore
 url = f"https://{router['ip']}:{router['port']}/restconf/data/Cisco-IOS-XE-interfaces-oper:interfaces"
 # print(url)
 
 response = requests.get(url, headers=headers, auth=(
     router['user'], router['password']), verify=False)
 
+#output status of all interfaces on device
 api_data = response.json()
 print("/" * 55)
 print(api_data["Cisco-IOS-XE-interfaces-oper:interface"]["description"])
