@@ -3,7 +3,7 @@ import json
 
 #using cisco sandbox device
 router = {"ip": "ios-xe-mgmt.cisco.com", "port": "9443",
-          "user": "root", "password": "D_Vay!_10&"}
+          "user": "root", "password": "password"}
 
 #headers
 headers = {"Accept": "application/yang-data+json",
