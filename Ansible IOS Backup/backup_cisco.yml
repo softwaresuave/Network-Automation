@@ -1,0 +1,66 @@
+---
+## Backup running configurations on Cisco network devices running IOSXE or NXOS ##
+- name: create directory on local server
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: timestamp
+      local_action: command date +%Y%m%d
+      register: timestamp
+
+    - name: create local directory
+      file:
+        path: /etc/ansible/backups/{{ timestamp.stdout }}
+        state: directory
+        mode: 0755 
+
+- name: Save IOS Configs
+  hosts: cisco-ios
+  gather_facts: no
+  ignore_errors: yes
+  vars:
+    creds:
+      host: "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - name: timestamp
+      local_action: command date +%Y%m%d
+      register: timestamp
+
+    - ios_command:
+        provider: "{{ creds }}"
+        commands: show run
+      register: show_run_ios
+
+
+
+    - copy:
+        content: "{{ show_run_ios.stdout[0] }}"
+        dest: "/etc/ansible/backups/{{ timestamp.stdout }}/{{ inventory_hostname }}_{{ timestamp.stdout }}.txt"
+
+- name: Save NXOS Configs
+  hosts: cisco-nxos
+  gather_facts: no
+  ignore_errors: yes
+  vars:
+    creds:
+      host: "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+  tasks:
+    - name: timestamp
+      local_action: command date +%Y%m%d
+      register: timestamp
+
+    - nxos_command:
+        provider: "{{ creds }}"
+        commands: show run
+      register: show_run_nxos
+
+
+    - copy:
+        content: "{{ show_run_nxos.stdout[0] }}"
+        dest: "/etc/ansible/backups/{{ timestamp.stdout }}/{{ inventory_hostname }}_{{ timestamp.stdout }}.txt"
+        
