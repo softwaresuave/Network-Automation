@@ -6,6 +6,7 @@ The scripts are set to be executed on devices within the Cisco DevNet Sandbox cu
 TOOLS
 <br>
 
+
 --- get_status.py ---
 
 Retrieves the status of each interface on a device using RESTCONF.
