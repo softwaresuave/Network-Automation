@@ -3,15 +3,17 @@ This Repository contains a variety of Network Automation tools for Cisco devices
 The scripts are set to be executed on devices within the Cisco DevNet Sandbox currently. This can be changed in the code. 
 
 <br>
+
 TOOLS
+
 <br>
 
 
 --- get_status.py ---
 
 Retrieves the status of each interface on a device using RESTCONF.
-<br>
 
+<br>
 --- restconf.ps1 ---
 
 Retrieves the running configuration of each interface on a device using RESTCONF.
@@ -20,7 +22,6 @@ The following url is documentation for IOS-XE RESTConf Yang Modules:
 https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/167/b_167_programmability_cg/restconf_programmable_interface.html
 
 <br>
-
 --- Ansible IOS Backup ---
 
 Ansible Playbook for backing up the running-configuration on Cisco devices.
